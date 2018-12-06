@@ -7,7 +7,7 @@ export default ({ firstVisit }) => (
 			firstVisit ? (
 				<div>
 					Welcome to CryptoDash, please select your favorite coins to
-					begin.{' '}
+					begin.
 				</div>
 			) : null
 		}
