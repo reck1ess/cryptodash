@@ -5,26 +5,27 @@ import { AppContext } from '../App/AppProvider';
 
 const Content = props => (
 	<AppContext.Consumer>
-		{({ coinList }) => {
-			if (!coinList) {
-				return (
-					<Wrapper>
-						<StyledSpinner viewBox="0 0 50 50">
-							<circle
-								className="path"
-								cx="25"
-								cy="25"
-								r="20"
-								fill="none"
-								strokeWidth="4"
-							/>
-						</StyledSpinner>
-					</Wrapper>
-				);
-			}
+		{({ coinList, prices, firstVisit }) => {
+			if (!coinList) return <Spinner />;
+			if (!firstVisit && !prices) return <Spinner />;
 			return <div>{props.children}</div>;
 		}}
 	</AppContext.Consumer>
+);
+
+const Spinner = () => (
+	<Wrapper>
+		<StyledSpinner viewBox="0 0 50 50">
+			<circle
+				className="path"
+				cx="25"
+				cy="25"
+				r="20"
+				fill="none"
+				strokeWidth="4"
+			/>
+		</StyledSpinner>
+	</Wrapper>
 );
 
 const Wrapper = styled.div`
