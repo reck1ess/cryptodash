@@ -13,9 +13,9 @@ export const CoinSymbol = styled.div`
 
 const DeleteIcon = styled.div`
 	justify-self: right;
-	display: none;
+	visibility: hidden;
 	${DeletableTile}:hover & {
-		display: block;
+		visibility: visible;
 		color: red;
 	}
 `;
