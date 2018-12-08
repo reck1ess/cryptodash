@@ -10,15 +10,20 @@ const CoinGridStyle = styled.div`
 	margin-top: 40px;
 `;
 
-const getCoinsToDisplay = coinList => Object.keys(coinList).slice(0, 100);
+const getCoinsToDisplay = (coinList, topSection) =>
+	Object.keys(coinList).slice(0, topSection ? 10 : 100);
 
-const CoinGrid = () => {
+const CoinGrid = ({ topSection }) => {
 	return (
 		<AppContext.Consumer>
 			{({ coinList }) => (
 				<CoinGridStyle>
-					{getCoinsToDisplay(coinList).map(coinKey => (
-						<CoinTile key={coinKey} coinKey={coinKey} />
+					{getCoinsToDisplay(coinList, topSection).map(coinKey => (
+						<CoinTile
+							key={coinKey}
+							topSection={topSection}
+							coinKey={coinKey}
+						/>
 					))}
 				</CoinGridStyle>
 			)}
