@@ -10,14 +10,16 @@ const PriceGrid = styled.div`
 	margin-top: 40px;
 `;
 
-export default () => (
-	<AppContext.Consumer>
-		{({ prices }) => (
-			<PriceGrid>
-				{prices.map((price, index) => (
-					<PriceTile index={index} price={price} />
-				))}
-			</PriceGrid>
-		)}
-	</AppContext.Consumer>
-);
+export default function() {
+	return (
+		<AppContext.Consumer>
+			{({ prices }) => (
+				<PriceGrid>
+					{prices.map((price, index) => (
+						<PriceTile index={index} price={price} />
+					))}
+				</PriceGrid>
+			)}
+		</AppContext.Consumer>
+	);
+}
