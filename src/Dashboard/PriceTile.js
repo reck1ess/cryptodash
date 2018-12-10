@@ -69,7 +69,7 @@ const PriceTileCompact = ({ sym, data }) => (
 
 export default ({ price, index }) => {
 	let sym = Object.keys(price)[0];
-	let data = price[sym]['WON'];
+	let data = price[sym]['USD'];
 	let TileClass = index < 5 ? PriceTile : PriceTileCompact;
 	return <TileClass sym={sym} data={data} />;
 };

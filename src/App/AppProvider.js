@@ -48,7 +48,7 @@ export class AppProvider extends Component {
 			try {
 				let priceData = await cc.priceFull(
 					this.state.favorites[i],
-					'WON'
+					'USD'
 				);
 				result.push(priceData);
 			} catch (e) {
