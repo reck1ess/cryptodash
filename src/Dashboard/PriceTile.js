@@ -1,8 +1,9 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { SelectableTile } from '../Shared/Tile';
-import { fontSize3, fontSizeBig } from '../Shared/Styles';
+import { fontSize3, fontSizeBig, greenBoxShadow } from '../Shared/Styles';
 import { CoinHeaderGridStyled } from '../Settings/CoinHeaderGrid';
+import { AppContext } from '../App/AppProvider';
 
 const JustifyRight = styled.div`
 	justify-self: right;
@@ -39,6 +40,13 @@ const PriceTileStyled = styled(SelectableTile)`
 			justify-items: right;
 			${fontSize3}
 		`}
+
+	${props =>
+		props.currentFavorite &&
+		css`
+			${greenBoxShadow};
+			pointer-events: none;
+		`}
 `;
 
 const ChangePercent = ({ data }) => (
@@ -49,8 +57,10 @@ const ChangePercent = ({ data }) => (
 	</JustifyRight>
 );
 
-const PriceTile = ({ sym, data }) => (
-	<PriceTileStyled>
+const PriceTile = ({ sym, data, currentFavorite, setCurrentFavorite }) => (
+	<PriceTileStyled
+		onClick={setCurrentFavorite}
+		currentFavorite={currentFavorite}>
 		<CoinHeaderGridStyled>
 			<div> {sym} </div>
 			<ChangePercent data={data} />
@@ -59,8 +69,16 @@ const PriceTile = ({ sym, data }) => (
 	</PriceTileStyled>
 );
 
-const PriceTileCompact = ({ sym, data }) => (
-	<PriceTileStyled compact>
+const PriceTileCompact = ({
+	sym,
+	data,
+	currentFavorite,
+	setCurrentFavorite,
+}) => (
+	<PriceTileStyled
+		compact
+		onClick={setCurrentFavorite}
+		currentFavorite={currentFavorite}>
 		<JustifyLeft> {sym} </JustifyLeft>
 		<ChangePercent data={data} />
 		<div>${numberFormat(data.PRICE)}</div>
@@ -71,5 +89,16 @@ export default ({ price, index }) => {
 	let sym = Object.keys(price)[0];
 	let data = price[sym]['USD'];
 	let TileClass = index < 5 ? PriceTile : PriceTileCompact;
-	return <TileClass sym={sym} data={data} />;
+	return (
+		<AppContext.Consumer>
+			{({ currentFavorite, setCurrentFavorite }) => (
+				<TileClass
+					sym={sym}
+					data={data}
+					currentFavorite={currentFavorite === sym}
+					setCurrentFavorite={() => setCurrentFavorite(sym)}
+				/>
+			)}
+		</AppContext.Consumer>
+	);
 };
