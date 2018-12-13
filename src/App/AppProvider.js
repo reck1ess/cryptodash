@@ -60,12 +60,12 @@ export class AppProvider extends Component {
 	};
 
 	confirmFavorites = () => {
-		let currentFavorites = this.state.favorites[0];
+		let currentFavorite = this.state.favorites[0];
 		this.setState(
 			{
 				firstVisit: false,
 				page: 'Dashboard',
-				currentFavorites,
+				currentFavorite,
 			},
 			() => {
 				this.fetchPrices();
@@ -75,7 +75,7 @@ export class AppProvider extends Component {
 			'cryptodash',
 			JSON.stringify({
 				favorites: this.state.favorites,
-				currentFavorites,
+				currentFavorite,
 			})
 		);
 	};
@@ -113,8 +113,8 @@ export class AppProvider extends Component {
 		if (!cryptoDashData) {
 			return { page: 'Settings', firstVisit: true };
 		}
-		let { favorites, currentFavorites } = cryptoDashData;
-		return { favorites, currentFavorites };
+		let { favorites, currentFavorite } = cryptoDashData;
+		return { favorites, currentFavorite };
 	};
 
 	render() {
