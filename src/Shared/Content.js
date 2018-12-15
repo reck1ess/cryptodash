@@ -6,14 +6,24 @@ import { AppContext } from '../App/AppProvider';
 const Content = props => (
 	<AppContext.Consumer>
 		{({ coinList, prices, firstVisit }) => {
-			if (!coinList) return <Spinner />;
-			if (!firstVisit && !prices) return <Spinner />;
+			if (!coinList)
+				return (
+					<div style={{ height: '100vh' }}>
+						<Spinner />{' '}
+					</div>
+				);
+			if (!firstVisit && !prices)
+				return (
+					<div style={{ height: '100vh' }}>
+						<Spinner />{' '}
+					</div>
+				);
 			return <div>{props.children}</div>;
 		}}
 	</AppContext.Consumer>
 );
 
-const Spinner = () => (
+export const Spinner = () => (
 	<Wrapper>
 		<StyledSpinner viewBox="0 0 50 50">
 			<circle
@@ -30,7 +40,7 @@ const Spinner = () => (
 
 const Wrapper = styled.div`
 	display: flex;
-	height: 100vh;
+	height: 100%;
 	justify-content: center;
 	align-items: center;
 `;

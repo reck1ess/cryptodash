@@ -52,7 +52,7 @@ const PriceTileStyled = styled(SelectableTile)`
 const ChangePercent = ({ data }) => (
 	<JustifyRight>
 		<ChangeColor red={data.CHANGEPCT24HOUR < 0}>
-			{numberFormat(data.CHANGEPCT24HOUR)}
+			{numberFormat(data.CHANGEPCT24HOUR)}%
 		</ChangeColor>
 	</JustifyRight>
 );
