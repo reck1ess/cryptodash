@@ -107,10 +107,11 @@ export class AppProvider extends Component {
 				page: 'Dashboard',
 				currentFavorite,
 				prices: null,
+				historical: null,
 			},
 			() => {
 				this.fetchPrices();
-				this.historical();
+				this.fetchHistorical();
 			}
 		);
 		localStorage.setItem(

@@ -1,4 +1,4 @@
-const theme = 'dark';
+const theme = 'light';
 export const lightTheme = theme === 'light';
 
 export const color = lightTheme ? 'white' : '#061a44';
